@@ -10,14 +10,14 @@ export const BalanceDisplay: FC = () => {
     useEffect(() => {
         if (!connection || !publicKey) { return }
 
-        connection.getAccountInfo(publicKey).then(info => {
-            setBalance(info.lamports);
+        connection.getBalance(publicKey).then(balance => {
+            setBalance(balance / LAMPORTS_PER_SOL)
         })
     }, [connection, publicKey])
 
     return (
         <div>
-            <p>{publicKey ? `Balance: ${balance / LAMPORTS_PER_SOL}` : ''}</p>
+            <p>{publicKey ? `Balance: ${balance}` : ''}</p>
         </div>
     )
 }
